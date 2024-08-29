@@ -1,4 +1,5 @@
 // FIXME: this string id business is awful, fix it please
+// TODO: get user input via scanner, setup initial product stock, then
 package org.example;
 
 public class Main {
@@ -26,6 +27,8 @@ public class Main {
         Order appleOrder3 = new Order("003", apples, 20, "Dora");
         mainShop.getOrderMapRepo().placeOrder(appleOrder3);
         System.out.println("However, she fails. I'm all out of apples.");
+
+
 
 
     }

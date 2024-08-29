@@ -28,6 +28,21 @@ class OrderMapRepoTest {
     }
 
     @Test
+    void placeOrder_shouldNotPlaceOrder_ifProductDoesntExist() {
+        ShopService shop = new ShopService();
+        OrderMapRepo testOrderRepo = shop.getOrderMapRepo();
+
+        Product soap = new Product("001", "Soap", 0.99, 1);
+        Order order2Soap = new Order("001", soap, 2, "Thomas");
+
+        // places order for something not in our product repo
+        testOrderRepo.placeOrder(order2Soap);
+
+        assertThat(testOrderRepo.getSingleOrder("001"))
+                .isNull();
+    }
+
+    @Test
     void placeOrder_shouldPlaceOrderAndUpdateStock_ifEnoughStock() {
         ShopService shop = new ShopService();
         OrderMapRepo testOrderRepo = shop.getOrderMapRepo();

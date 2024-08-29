@@ -8,9 +8,6 @@ public class OrderMapRepo implements OrderRepo{
     private ShopService shopService;
     private ProductRepo productRepo;
 
-    public OrderMapRepo(){
-
-    }
     public OrderMapRepo(ShopService shopService, ProductRepo productRepo) {
         this.shopService = shopService;
         this.productRepo = productRepo;
@@ -18,8 +15,12 @@ public class OrderMapRepo implements OrderRepo{
 
     @Override
     public void placeOrder(Order order){
+        // prints error message if product doesn't exist in repo
+        if(productRepo.getSingleProduct(order.product().id()) == null){
+            System.out.println("Error: Product doesn't exist");
+        }
         // if available product stock higher than order amount
-        if(productRepo.getSingleProduct(order.product().id()).amountInStock() >= order.amount()){
+        else if(productRepo.getSingleProduct(order.product().id()).amountInStock() >= order.amount()){
             // adds order to order inventory
             orderInventory.put(order.id(), order);
             // updates the stock by removing the original product and adding another with updated stock
