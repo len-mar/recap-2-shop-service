@@ -3,6 +3,14 @@ import java.util.*;
 
 public class ProductRepo {
     private Map<String, Product> prodInventory = new HashMap<>();
+    private ShopService shopService;
+
+    public ProductRepo(){
+
+    }
+    public ProductRepo(ShopService shopService) {
+        this.shopService = shopService;
+    }
 
     public void addProduct(Product product){
         prodInventory.put(product.id(), product);

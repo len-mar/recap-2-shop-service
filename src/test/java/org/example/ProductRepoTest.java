@@ -8,18 +8,23 @@ class ProductRepoTest {
 // note: getSingleProduct is used for all tests' assertions and therefore tested as well
 
     @Test
-    void addProductShouldAddProduct() {
-        ProductRepo testProductRepo = new ProductRepo();
+    void addProduct_shouldAddProductToRepo() {
+        ShopService shop = new ShopService();
+        ProductRepo testProductRepo = shop.getProductRepo();
+
         Product soap = new Product("001", "Soap", 0.99, 50);
         testProductRepo.addProduct(soap);
+
         assertThat(testProductRepo.getSingleProduct("001"))
             .isNotNull()
             .isEqualTo(soap);
     }
 
     @Test
-    void removeProductShouldRemoveProduct() {
-        ProductRepo testProductRepo = new ProductRepo();
+    void removeProduct_shouldRemoveProductFromRepo() {
+        ShopService shop = new ShopService();
+        ProductRepo testProductRepo = shop.getProductRepo();
+
         Product soap = new Product("001", "Soap", 0.99, 50);
         testProductRepo.addProduct(soap);
         assertThat(testProductRepo.getSingleProduct("001"))
@@ -34,8 +39,10 @@ class ProductRepoTest {
 
 
     @Test
-    void getAllProducts() {
-        ProductRepo testProductRepo = new ProductRepo();
+    void getAllProducts_shouldReturnAllProducts() {
+        ShopService shop = new ShopService();
+        ProductRepo testProductRepo = shop.getProductRepo();
+
         Product soap = new Product("001", "Soap", 0.99, 50);
         Product toaster = new Product("002", "Toaster", 25.99, 10);
 

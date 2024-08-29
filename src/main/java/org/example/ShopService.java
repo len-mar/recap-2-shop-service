@@ -1,24 +1,31 @@
 package org.example;
-import org.apache.commons.lang3.RandomStringUtils;
-
 
 public class ShopService {
     private OrderMapRepo orderMapRepo;
     private ProductRepo productRepo;
 
-    public ShopService(OrderMapRepo orderMapRepo, ProductRepo productRepo){
-        this.orderMapRepo = new OrderMapRepo();
-        this.productRepo = new ProductRepo();
+    // creates new order and product repos at time of instantiation
+    public ShopService(){
+        this.productRepo = new ProductRepo(this);
+        this.orderMapRepo = new OrderMapRepo(this, this.productRepo);
     }
 
-    public void placeOrder(Product product, long amount){
-        if(productRepo.getSingleProduct(product.id()).amountInStock()>= amount){
-            orderMapRepo.addOrder(new Order(RandomStringUtils.random(5, false, true), product, amount, "Barbara"));
-            productRepo.getSingleProduct(product.id()).withAmount(amount);
-        }
-        else{
-            System.out.println("Error: There might not be enough product in stock.");
-        }
-
+    public OrderMapRepo getOrderMapRepo() {
+        return orderMapRepo;
     }
+
+    public void setOrderMapRepo(OrderMapRepo orderMapRepo) {
+        this.orderMapRepo = orderMapRepo;
+    }
+
+    public ProductRepo getProductRepo() {
+        return productRepo;
+    }
+
+    public void setProductRepo(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
+
+    // todo: how to include the customer dynamically?
+
 }
