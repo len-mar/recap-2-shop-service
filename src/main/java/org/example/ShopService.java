@@ -26,6 +26,4 @@ public class ShopService {
         this.productRepo = productRepo;
     }
 
-    // todo: how to include the customer dynamically?
-
 }

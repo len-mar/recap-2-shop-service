@@ -1,5 +1,6 @@
 // FIXME: this string id business is awful, fix it please
-// TODO: get user input via scanner, setup initial product stock, then
+// FIXME: some methods take an id, some take the object, decide on one and be consistent
+
 package org.example;
 
 public class Main {
