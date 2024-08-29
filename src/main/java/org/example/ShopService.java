@@ -12,7 +12,7 @@ public class ShopService {
     }
 
     public void placeOrder(Product product, long amount){
-        if(productRepo.getSingleProduct(product.id()).amount()>= amount){
+        if(productRepo.getSingleProduct(product.id()).amountInStock()>= amount){
             orderMapRepo.addOrder(new Order(RandomStringUtils.random(5, false, true), product, amount, "Barbara"));
             productRepo.getSingleProduct(product.id()).withAmount(amount);
         }
